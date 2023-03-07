@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Repository.Base
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> where T : class
     {
         private readonly ChatAppContext _context;
         public BaseRepository(ChatAppContext context)

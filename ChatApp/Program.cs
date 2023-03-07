@@ -50,7 +50,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<UserMiddleware>();
-app.UseSession();
+
 app.MapControllers();
 
 app.Run();
