@@ -16,7 +16,6 @@ namespace ChatApp.Controllers
 
         public UserController(IUserService userService)
         {
-
             _userService = userService;
         }
 

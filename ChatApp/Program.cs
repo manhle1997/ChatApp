@@ -1,5 +1,8 @@
 using ChatApp.Data.Contexts;
 using ChatApp.Middleware;
+using ChatApp.Repository.Extensions;
+using ChatApp.Services;
+using ChatApp.Services.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -35,7 +38,8 @@ builder.Services.AddAuthentication(options =>
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
         };
     });
-builder.Services.AddSignalR();
+builder.Services.ServiceExtension();
+builder.Services.RepositoryExtension();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

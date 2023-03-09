@@ -7,6 +7,7 @@ namespace ChatApp.Repository
     {
         public UserRepository(ChatAppContext context) : base(context)
         {
+
         }
     }
 }

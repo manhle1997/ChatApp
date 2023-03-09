@@ -34,7 +34,8 @@ namespace ChatApp.Repository.Base
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await _context.Set<T>().ToListAsync();
+            var result =  await _context.Set<T>().ToListAsync();
+            return result;
         }
 
         public async Task<T> GetById(int id)
