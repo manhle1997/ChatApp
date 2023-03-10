@@ -1,17 +1,21 @@
-﻿using ChatApp.Data.Contexts;
+﻿using ChatApp.Base;
+using ChatApp.Data.Contexts;
 using ChatApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using System.Security.Claims;
+using System.Net.Http;
 
 namespace ChatApp.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
+        private HttpResponseMessage response;
         private readonly IUserService _userService;
 
         public UserController(IUserService userService)
@@ -22,43 +26,58 @@ namespace ChatApp.Controllers
         // GET: api/User
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IEnumerable<User>> GetUsers()
+        public List<User> GetUsers()
         {
-            return await _userService.GetAll();
+            return _userService.GetAll().ToList();
         }
 
         // GET: api/User/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "admin")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        //[Authorize(Roles = "admin")]
+        [AllowAnonymous]
+        public User? GetUser(int id)
         {
-            var user = await _userService.GetById(id);
+            var user = _userService.GetById(id);
             return user;
         }
 
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, User user)
+        [HttpPut]
+        public void Update(User user)
         {
-            var result = await _userService.Update(id, user);
-            return Ok(result);
+            _userService.Update(user);
+            _userService.SaveChanges();
         }
 
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<User> PostUser(User user)
+        public HttpResponseMessage AddUser(User user)
         {
-            var model = await _userService.Add(user);
-            return model;
+            ResultBase result = new ResultBase();
+            try
+            {
+                _userService.Add(user);
+                _userService.SaveChanges();
+                response = Request.CreateResponse(HttpStatusCode.OK, user);
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+                result.StatusCode = (int)HttpStatusCode.BadRequest;
+            }
+            return response;
+
+
         }
 
         // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public void DeleteUser(int id)
+        [HttpDelete]
+        public void DeleteUser(User user)
         {
-            _userService.Delete(id);
+            _userService.Delete(user);
+            _userService.SaveChanges();
         }
 
         private User GetCurrentUser()

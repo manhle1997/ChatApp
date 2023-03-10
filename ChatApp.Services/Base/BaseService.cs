@@ -10,33 +10,33 @@ namespace ChatApp.Services.Base
     public class BaseService<T> where T : class
     {
         private readonly IBaseRepository<T> _baseRepository;
-        public BaseService(
-            IBaseRepository<T> baseRepository
-            ) 
+        public BaseService
+            (IBaseRepository<T> baseRepository
+            )
         {
             _baseRepository = baseRepository;
         }
-        Task<T> Add(T t)
+        public void Add(T t)
         {
-            return _baseRepository.Add( t );
+            _baseRepository.Add(t);
         }
-        Task<int> Update(int id, T t)
+        public void Update(T t)
         {
-            return _baseRepository.Update( id, t );
+            _baseRepository.Update(t);
         }
-        void Delete(int id)
+        public void Delete(T t)
         {
-            _baseRepository.Delete( id );
+            _baseRepository.Delete(t);
         }
-        Task<IEnumerable<T>> GetAll() 
-        { 
-            return _baseRepository.GetAll(); 
-        }
-        Task<T> GetById(int id)
+        public IQueryable<T> GetAll()
         {
-            return _baseRepository.GetById( id );
+            return _baseRepository.GetAll();
         }
-        Task<int> SaveChanges()
+        public T? GetById(int id)
+        {
+            return _baseRepository.GetById(id);
+        }
+        public int SaveChanges()
         {
             return _baseRepository.SaveChanges();
         }

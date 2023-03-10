@@ -11,34 +11,34 @@ namespace ChatApp.Services
             _userRepository = userRepository;
         }
 
-        public Task<User> Add(User model)
+        public void Add(User model)
         {
-            return _userRepository.Add(model);
+            _userRepository.Add(model);
         }
 
-        public void Delete(int id)
+        public void Delete(User model)
         {
-            _userRepository.Delete(id);
+            _userRepository.Delete(model);
         }
 
-        public Task<IEnumerable<User>> GetAll()
+        public IQueryable<User> GetAll()
         {
             return _userRepository.GetAll();
         }
 
-        public Task<User> GetById(int id)
+        public User? GetById(int id)
         {
             return _userRepository.GetById(id);
         }
 
-        public Task<int> SaveChanges()
+        public int SaveChanges()
         {
             return _userRepository.SaveChanges();
         }
 
-        public Task<int> Update(int id, User model)
+        public void Update(User model)
         {
-            return _userRepository.Update(id, model);
+            _userRepository.Update(model);
         }
     }
 }

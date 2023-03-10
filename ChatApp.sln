@@ -5,11 +5,13 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp", "ChatApp\ChatApp.csproj", "{72184E6A-67AD-4884-BE16-240E96672A3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Services", "ChatApp.Services\ChatApp.Services.csproj", "{9254E046-EA8F-43F5-BFB1-8E0EEFA0FD19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Services", "ChatApp.Services\ChatApp.Services.csproj", "{9254E046-EA8F-43F5-BFB1-8E0EEFA0FD19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Repository", "ChatApp.Repository\ChatApp.Repository.csproj", "{CB4500CC-0CA2-40EC-A9C4-AF75291A1347}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Repository", "ChatApp.Repository\ChatApp.Repository.csproj", "{CB4500CC-0CA2-40EC-A9C4-AF75291A1347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Data", "ChatApp.Data\ChatApp.Data.csproj", "{F728A1AD-4EE8-4CFD-AD95-F237377C6F87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Data", "ChatApp.Data\ChatApp.Data.csproj", "{F728A1AD-4EE8-4CFD-AD95-F237377C6F87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Base", "ChatApp.Base\ChatApp.Base.csproj", "{1540E2CD-BF1E-4C7E-BF98-12C6025416DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F728A1AD-4EE8-4CFD-AD95-F237377C6F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F728A1AD-4EE8-4CFD-AD95-F237377C6F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F728A1AD-4EE8-4CFD-AD95-F237377C6F87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1540E2CD-BF1E-4C7E-BF98-12C6025416DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1540E2CD-BF1E-4C7E-BF98-12C6025416DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1540E2CD-BF1E-4C7E-BF98-12C6025416DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1540E2CD-BF1E-4C7E-BF98-12C6025416DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

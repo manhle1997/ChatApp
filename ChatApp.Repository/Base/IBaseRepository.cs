@@ -2,11 +2,11 @@
 {
     public interface IBaseRepository<T> where T : class
     {
-        Task<T> Add(T t);
-        Task<int> Update(int id, T t);
-        void Delete(int id);
-        Task<IEnumerable<T>> GetAll();
-        Task<T> GetById(int id);
-        Task<int> SaveChanges();
+        void Add(T t);
+        void Update(T t);
+        void Delete(T t);
+        IQueryable<T> GetAll();
+        T? GetById(int id);
+        int SaveChanges();
     }
 }

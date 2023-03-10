@@ -10,55 +10,43 @@ namespace ChatApp.Repository.Base
 {
     public class BaseRepository<T> where T : class
     {
-        private readonly ChatAppContext _context;
+        private ChatAppContext _context;
+        
         public BaseRepository(ChatAppContext context)
         {
             _context = context;
         }
 
-        public async Task<T> Add(T t)
+        public void Add(T t)
         {
-            var result = await _context.Set<T>().AddAsync(t);
-            await _context.SaveChangesAsync();
-            return result.Entity;
+            _context.Set<T>().Add(t);
         }
 
-        public async void Delete(int id)
+        public void Delete(T t)
         {
-            var model = await GetById(id);
-            if (model != null)
-            {
-                _context.Set<T>().Remove(model);
-            }
+            _context.Set<T>().Remove(t);
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public IQueryable<T> GetAll()
         {
-            var result =  await _context.Set<T>().ToListAsync();
+            var result = _context.Set<T>();
             return result;
         }
 
-        public async Task<T> GetById(int id)
+        public T? GetById(int id)
         {
-            var result = await _context.Set<T>().FindAsync(id);
-            return result;
+            return _context.Set<T>().Find(id);
+            
         }
 
-        public async Task<int> SaveChanges()
+        public int SaveChanges()
         {
-            return await _context.SaveChangesAsync();
+            return _context.SaveChanges();
         }
 
-        public async Task<int> Update(int id, T t)
+        public void Update(T t)
         {
-            var model = await GetById(id);
-            if (model != null)
-            {
-                model = t;
-                var result = _context.Set<T>().Update(model);
-                return id;
-            }
-            return 0;
+            _context.Entry(t).State = EntityState.Modified;
         }
     }
 }
