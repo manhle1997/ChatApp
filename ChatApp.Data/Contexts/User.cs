@@ -8,7 +8,7 @@ public partial class User
 
     public DateTime? CreatedDate { get; set; }
 
-    public string Password { get; set; } = null!;
+    public string? Password { get; set; } = null!;
 
     public string? Role { get; set; }
 }

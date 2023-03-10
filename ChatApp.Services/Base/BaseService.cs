@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +28,10 @@ namespace ChatApp.Services.Base
         public void Delete(T t)
         {
             _baseRepository.Delete(t);
+        }
+        public void Delete(Expression<Func<T, bool>> where)
+        {
+            
         }
         public IQueryable<T> GetAll()
         {

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,15 +12,18 @@ namespace ChatApp.Repository.Base
     public class BaseRepository<T> where T : class
     {
         private ChatAppContext _context;
+        private readonly DbSet<T> _dbSet;
         
         public BaseRepository(ChatAppContext context)
         {
             _context = context;
+            _dbSet = _context.Set<T>();
         }
 
         public void Add(T t)
         {
             _context.Set<T>().Add(t);
+            _context.Entry(t).State = EntityState.Added;
         }
 
         public void Delete(T t)
@@ -27,15 +31,23 @@ namespace ChatApp.Repository.Base
             _context.Set<T>().Remove(t);
         }
 
-        public IQueryable<T> GetAll()
+        public void Delete(Expression<Func<T, bool>> where)
         {
-            var result = _context.Set<T>();
-            return result;
+            IEnumerable<T> objects = _context.Set<T>().Where(where).AsEnumerable();  
+            foreach (T obj in objects)
+            {
+                _dbSet.Remove(obj);
+            }
+        }
+
+        public IQueryable<T> GetAll()
+        {            
+            return _dbSet;
         }
 
         public T? GetById(int id)
         {
-            return _context.Set<T>().Find(id);
+            return _dbSet.Find(id);
             
         }
 
@@ -46,7 +58,9 @@ namespace ChatApp.Repository.Base
 
         public void Update(T t)
         {
-            _context.Entry(t).State = EntityState.Modified;
+           _dbSet.Attach(t);
+           _context.Entry(t).State = EntityState.Modified;
+           //_context.Update(t);
         }
     }
 }
