@@ -15,7 +15,6 @@ namespace ChatApp.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private HttpResponseMessage response;
         private readonly IUserService _userService;
 
         public UserController(IUserService userService)
@@ -53,21 +52,18 @@ namespace ChatApp.Controllers
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public HttpResponseMessage AddUser(User user)
+        public ActionResult<ResultBase> AddUser(User user)
         {
-            ResultBase result = new ResultBase();
             try
             {
                 _userService.Add(user);
-                _userService.SaveChanges();
-                response = Request.CreateResponse(HttpStatusCode.OK, user);
+                _userService.SaveChanges();                
             }
             catch (Exception ex)
             {
-                result.Message = ex.Message;
-                result.StatusCode = (int)HttpStatusCode.BadRequest;
+                return ResultBase.GetResultBase((int)HttpStatusCode.BadRequest, ex.Message, false, user);
             }
-            return response;
+            return ResultBase.GetResultBase((int)HttpStatusCode.OK, "", true, user); ;
 
 
         }
