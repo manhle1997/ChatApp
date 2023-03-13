@@ -1,4 +1,5 @@
-﻿using ChatApp.Services.Base;
+﻿using ChatApp.Data.Contexts;
+using ChatApp.Services.Base;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace ChatApp.Services.Extensions
     {
         public static IServiceCollection ServiceExtension(this IServiceCollection services)
         {
+            services.AddTransient<IBaseService<User>, UserService>();
             services.AddTransient<IUserService, UserService>();
             return services;
         }

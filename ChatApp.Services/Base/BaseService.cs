@@ -1,4 +1,5 @@
 ﻿using ChatApp.Repository.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,18 @@ namespace ChatApp.Services.Base
         public T? GetById(int id)
         {
             return _baseRepository.GetById(id);
+        }
+        public T? GetById(long id)
+        {
+            return _baseRepository.GetById(id);
+        }
+        public IQueryable<T> GetMany(Expression<Func<T, bool>> where)
+        {
+            return _baseRepository.GetMany(where);
+        }
+        public bool Any(Expression<Func<T, bool>> where)
+        {
+            return _baseRepository.Any(where);
         }
         public int SaveChanges()
         {

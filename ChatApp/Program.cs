@@ -38,6 +38,7 @@ builder.Services.AddAuthentication(options =>
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
         };
     });
+
 builder.Services.ServiceExtension();
 builder.Services.RepositoryExtension();
 var app = builder.Build();

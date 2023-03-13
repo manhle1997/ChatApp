@@ -50,6 +50,18 @@ namespace ChatApp.Repository.Base
             return _dbSet.Find(id);
             
         }
+        public T? GetById(long id)
+        {
+            return _dbSet.Find(id);
+        }
+        public IQueryable<T> GetMany(Expression<Func<T, bool>> where)
+        {
+            return _dbSet.Where(where);
+        }
+        public bool Any(Expression<Func<T, bool>> where)
+        {
+            return _dbSet.Any(where);
+        }
 
         public int SaveChanges()
         {
@@ -59,8 +71,6 @@ namespace ChatApp.Repository.Base
         public void Update(T t)
         {
            _dbSet.Attach(t);
-           _context.Entry(t).State = EntityState.Modified;
-           //_context.Update(t);
         }
     }
 }

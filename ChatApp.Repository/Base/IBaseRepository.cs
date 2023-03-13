@@ -10,6 +10,9 @@ namespace ChatApp.Repository.Base
         void Delete(Expression<Func<T, bool>> where);
         IQueryable<T> GetAll();
         T? GetById(int id);
+        T? GetById(long id);
+        IQueryable<T> GetMany(Expression<Func<T, bool>> where);
+        bool Any(Expression<Func<T, bool>> where);
         int SaveChanges();
     }
 }
