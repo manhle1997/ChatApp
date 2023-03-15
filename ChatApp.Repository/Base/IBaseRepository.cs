@@ -2,7 +2,7 @@
 
 namespace ChatApp.Repository.Base
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<T> : IDisposable where T : class
     {
         void Add(T t);
         void Update(T t);

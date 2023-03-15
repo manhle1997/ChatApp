@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Repository.Base
 {
-    public class BaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         private ChatAppContext _context;
         private readonly DbSet<T> _dbSet;
@@ -71,6 +71,15 @@ namespace ChatApp.Repository.Base
         public void Update(T t)
         {
            _dbSet.Attach(t);
+        }
+
+        public void Dispose()
+        {
+            if (_context != null)
+            {
+                _context.Dispose();
+                _context = null;
+            }
         }
     }
 }

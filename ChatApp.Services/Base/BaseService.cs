@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Services.Base
 {
-    public class BaseService<T> where T : class
+    public class BaseService<T> : IBaseService<T> where T : class
     {
         private readonly IBaseRepository<T> _baseRepository;
         public BaseService
@@ -32,7 +32,7 @@ namespace ChatApp.Services.Base
         }
         public void Delete(Expression<Func<T, bool>> where)
         {
-            
+            _baseRepository.Delete(where);
         }
         public IQueryable<T> GetAll()
         {

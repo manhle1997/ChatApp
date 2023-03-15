@@ -13,8 +13,8 @@ namespace ChatApp.Services.Extensions
     {
         public static IServiceCollection ServiceExtension(this IServiceCollection services)
         {
-            services.AddTransient<IBaseService<User>, UserService>();
-            services.AddTransient<IUserService, UserService>();
+            services.AddScoped<IBaseService<User>, UserService>();
+            services.AddScoped<IUserService, UserService>();
             return services;
         }
     }

@@ -9,5 +9,6 @@ namespace ChatApp.Services
 {
     public interface IUserService : IBaseService<User>
     {
+
     }
 }

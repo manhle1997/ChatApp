@@ -43,10 +43,18 @@ namespace ChatApp.Controllers
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
-        public void Update(User user)
+        public ActionResult<ResultBase> Update(User user)
         {
-            _userService.Update(user);
-            _userService.SaveChanges();
+            try
+            {
+                _userService.Update(user);
+                _userService.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return ResultBase.GetResultBase((int)HttpStatusCode.BadRequest, ex.Message, false, user);
+            }
+            return ResultBase.GetResultBase((int)HttpStatusCode.OK, "", true, user);
         }
 
         // POST: api/User
@@ -63,9 +71,7 @@ namespace ChatApp.Controllers
             {
                 return ResultBase.GetResultBase((int)HttpStatusCode.BadRequest, ex.Message, false, user);
             }
-            return ResultBase.GetResultBase((int)HttpStatusCode.OK, "", true, user); ;
-
-
+            return ResultBase.GetResultBase((int)HttpStatusCode.OK, "", true, user);
         }
 
         // DELETE: api/User/5

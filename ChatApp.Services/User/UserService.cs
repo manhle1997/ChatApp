@@ -13,6 +13,6 @@ namespace ChatApp.Services
             IUserRepository userRepository) : base(baseRepository) 
         {
             _userRepository = userRepository;
-        }        
+        }
     }
 }

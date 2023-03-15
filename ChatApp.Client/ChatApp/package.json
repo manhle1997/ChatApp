@@ -13,6 +13,7 @@
   "dependencies": {
     "@aspnet/signalr": "^1.0.27",
     "@latelier/vue-signalr": "^2.0.4",
-    "@microsoft/signalr": "^7.0.2"
+    "@microsoft/signalr": "^7.0.2",
+    "bootstrap-vue": "^2.23.1"
   }
 }
