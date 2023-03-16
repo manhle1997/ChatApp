@@ -1,3 +1,3 @@
-<template>
+<template>    
     <layout-header></layout-header>
 </template>
